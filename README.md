@@ -36,7 +36,13 @@ This algorithm makes a frontier list and every time choose a state from that fro
 This algorithm makes a frontier list and also a explored list. Every time chooses a state from that frontier with a strategy (e.g. UCS, DFS, etc.) and it checks that, the state that has been choosen was not been seen before.
 
 ## Depth-First Search
-- DFS strategy is to expand a deepest node first. 
+- DFS strategy is to expand the deepest node first. 
 - Its frontier is _LIFO (Last in first out = stack)_
 - It returns the solution by the time it reaches to it.
+
+## Breadth-First Search
+- BFS strategy is to expand the shallowest node first. 
+- Its frontier is _FIFO (First in first out = queue)_
+- It returns the solution by the time it reaches to it.
+
 

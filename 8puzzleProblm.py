@@ -14,4 +14,5 @@ GoalState = [
     [7, 6, 5]
 ]
 
-print(Search.searchDFS(initialState, GoalState))
+# print(Search.searchDFS(initialState, GoalState))
+print(Search.searchBFS(initialState, GoalState))

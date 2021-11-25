@@ -11,12 +11,16 @@ class SearchAlgorithm():
         Just import and call the method you want with the
         required arguments.
     """
+    def __init__(self):
+        pass
+    
     def searchDFS(self, initialState, GoalState, spaceGraph=[]):
         """This algorithm will return the solution path.
 
         Args:
             initialState (List): Start state.
             GoalState (list): End state.
+            spaceGraph (list): For the time user enter his graph states.
         """
         if spaceGraph == []:
             currentState = list()
@@ -56,13 +60,12 @@ class SearchAlgorithm():
                 # current state is in explored list
                 pass
             
-            # step 2
-            # deleting the currentstate from the fringe 
+            # step 2 - deleting the currentstate from the fringe 
             currentStateIndex = self.fringe.index(currentState)
             del self.fringe[currentStateIndex]
             
             # now we must calculate the child of the currentstate and add them to the frontier 
-            # In this code our default is 8 puzzle problem
+            # In this code our default problem is 8 puzzle problem
             self.updateFringe(currentState, explored)
             
             # Step 3
@@ -70,9 +73,65 @@ class SearchAlgorithm():
             
             counter += 1
             
-    def __init__(self):
-        pass
+    def searchBFS(self, initialState, GoalState, spaceGraph=[]):
+        """This algorithm will return the solution path.
 
+        Args:
+            initialState (List): Start state.
+            GoalState (list): End state.
+            spaceGraph (list): For the time user enter his graph states.
+        """
+        if spaceGraph == []:
+            currentState = list()
+            self.fringe = list()
+            explored = list()
+            parentStates = list()
+            
+            currentState = initialState
+            self.fringe.append(currentState)
+            
+        else:
+            # we don't need to calculate the childs.
+            pass
+        counter = 0 
+        
+        while True:
+            
+            # step 1
+            if currentState not in explored:
+                explored.append(currentState)
+                # parentStates.append(currentState)
+                
+                print("\n\n", "This is currrent state: ", "\n\n")
+                for i in currentState:
+                    print(i)
+                    
+                # print("\n\n", "This is Goal state: ", "\n\n")
+                # for i in GoalState:
+                #     print(i)
+                    
+                # if counter == 50:
+                #     break
+                if currentState == GoalState:
+                    print("The path has been found.")
+                    return explored
+            else:
+                # current state is in explored list
+                pass
+            
+            # step 2 - deleting the currentstate from the fringe 
+            currentStateIndex = self.fringe.index(currentState)
+            del self.fringe[currentStateIndex]
+            
+            # now we must calculate the child of the currentstate and add them to the frontier 
+            # In this code our default problem is 8 puzzle problem
+            self.updateFringe(currentState, explored)
+            
+            # Step 3
+            currentState = self.fringe[0]
+            
+            counter += 1
+    
     def searchAstar(self):
         pass
 
@@ -80,9 +139,6 @@ class SearchAlgorithm():
         pass
 
     def searchUCS(self):
-        pass
-
-    def searchBFS(self):
         pass
 
     def searchIDS(self):

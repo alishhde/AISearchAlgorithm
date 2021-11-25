@@ -41,15 +41,10 @@ class SearchAlgorithm():
             # step 1
             if currentState not in explored:
                 explored.append(currentState)
-                # parentStates.append(currentState)
                 
                 print("\n\n", "This is currrent state: ", "\n\n")
-                for i in currentState:
-                    print(i)
-                    
-                # print("\n\n", "This is Goal state: ", "\n\n")
-                # for i in GoalState:
-                #     print(i)
+                for row in currentState:
+                    print(row)
                     
                 if counter == 50:
                     break
@@ -100,21 +95,18 @@ class SearchAlgorithm():
             # step 1
             if currentState not in explored:
                 explored.append(currentState)
-                # parentStates.append(currentState)
                 
                 print("\n\n", "This is currrent state: ", "\n\n")
                 for i in currentState:
                     print(i)
                     
-                # print("\n\n", "This is Goal state: ", "\n\n")
-                # for i in GoalState:
-                #     print(i)
-                    
                 # if counter == 50:
                 #     break
+                
                 if currentState == GoalState:
                     print("The path has been found.")
                     return explored
+                
             else:
                 # current state is in explored list
                 pass
@@ -130,7 +122,98 @@ class SearchAlgorithm():
             # Step 3
             currentState = self.fringe[0]
             
-            counter += 1
+            # counter += 1
+            
+    def searchDLS(self, initialState, GoalState, limitation, spaceGraph=[]):
+        """This algorithm is depth limited search and will return the solution path. 
+
+        Args:
+            initialState (List): Start state.
+            GoalState (list): End state.
+            spaceGraph (list): For the time user enter his graph states.
+        """
+        if spaceGraph == []:
+            currentState = list()
+            self.fringe = list()
+            explored = list()
+            parentStates = list()
+            pathexplored = list()
+            
+            currentState = initialState
+            self.fringe.append(currentState)
+            
+        else:
+            # we don't need to calculate the childs.
+            pass
+        counter = 0 
+        limitCounter = 0
+        while True:
+            
+            if limitCounter == limitation:
+                # step 1
+                if currentState not in explored:
+                    explored.append(currentState)
+                    
+                    print("\n\n", "This is currrent state: ", "\n\n")
+                    for row in currentState:
+                        print(row)
+                        
+                    # if counter == 50:
+                    #     break
+                    
+                    if currentState == GoalState:
+                        print("The path has been found.")
+                        return explored
+                else:
+                    # current state is in explored list
+                    pass
+                
+                # step 2 - deleting the currentstate from the fringe 
+                currentStateIndex = self.fringe.index(currentState)
+                del self.fringe[currentStateIndex]
+                
+                if self.fringe == []:
+                    return "The answere has not been found in this depth", explored
+                
+                # Step 3
+                currentState = self.fringe[-1]
+            
+            else:
+                # step 1
+                if currentState not in explored:
+                    explored.append(currentState)
+                    
+                    print("\n\n", "This is currrent state: ", "\n\n")
+                    for row in currentState:
+                        print(row)
+                        
+                    if counter == 50:
+                        break
+                    if currentState == GoalState:
+                        print("The path has been found.")
+                        return explored
+                else:
+                    # current state is in explored list
+                    pass
+                
+                # step 2 - deleting the currentstate from the fringe 
+                currentStateIndex = self.fringe.index(currentState)
+                del self.fringe[currentStateIndex]
+                
+                # now we must calculate the child of the currentstate and add them to the frontier 
+                # In this code our default problem is 8 puzzle problem
+                self.updateFringe(currentState, explored)
+                
+                # Step 3
+                currentState = self.fringe[-1]
+                
+                limitCounter += 1
+        
+            # counter += 1
+            
+    
+    def searchIDS(self):
+        pass
     
     def searchAstar(self):
         pass
@@ -141,8 +224,6 @@ class SearchAlgorithm():
     def searchUCS(self):
         pass
 
-    def searchIDS(self):
-        pass
 
     def updateFringe(self, currentState, parents, problem="eightPuzzle"):
         """

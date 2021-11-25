@@ -15,4 +15,5 @@ GoalState = [
 ]
 
 # print(Search.searchDFS(initialState, GoalState))
-print(Search.searchBFS(initialState, GoalState))
+# print(Search.searchBFS(initialState, GoalState))
+print(Search.searchDLS(initialState, GoalState, 2), sep=" === > \n\n")

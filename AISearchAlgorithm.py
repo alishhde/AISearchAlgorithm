@@ -30,13 +30,28 @@ class SearchAlgorithm():
         else:
             # we don't need to calculate the childs.
             pass
+        counter = 0 
         
-        while currentState != GoalState:
+        while True:
             
             # step 1
             if currentState not in explored:
                 explored.append(currentState)
-                parentStates.append(currentState)
+                # parentStates.append(currentState)
+                
+                print("\n\n", "This is currrent state: ", "\n\n")
+                for i in currentState:
+                    print(i)
+                    
+                # print("\n\n", "This is Goal state: ", "\n\n")
+                # for i in GoalState:
+                #     print(i)
+                    
+                if counter == 50:
+                    break
+                if currentState == GoalState:
+                    print("The path has been found.")
+                    return explored
             else:
                 # current state is in explored list
                 pass
@@ -48,10 +63,12 @@ class SearchAlgorithm():
             
             # now we must calculate the child of the currentstate and add them to the frontier 
             # In this code our default is 8 puzzle problem
-            self.updateFringe(currentState, parentStates)
+            self.updateFringe(currentState, explored)
             
             # Step 3
             currentState = self.fringe[-1]
+            
+            counter += 1
             
     def __init__(self):
         pass

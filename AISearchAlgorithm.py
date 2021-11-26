@@ -1,9 +1,9 @@
-# 										Writer of this code:
-# 								   Seyyed Ali Shohadaalhosseini
+# 										                                                     Writer of this code:
+# 								                                                        Seyyed Ali Shohadaalhosseini
 
-#                                    We'll never forget that:
+#                                                                                          We'll never forget that:
 #
-# 			        	 < What doesn't kill you makes you STRONGER >
+# 			        	                                                        < What doesn't kill you makes you STRONGER >
 
 class SearchAlgorithm():
     """
@@ -211,8 +211,7 @@ class SearchAlgorithm():
         
             # counter += 1
             
-    
-    def searchIDS(self):
+    def searchIDS(self, initialState, GoalState, spaceGraph=[]):
         """ DLS Has problem. """
         pass
     
@@ -428,6 +427,8 @@ class SearchAlgorithm():
             newState (list): The state is a a of three list
             type (str, optional):  Defaults to "MissedPlaced".
         """
+        # -------------------This method is not right--------------------- #
+        # -------------------This method is not right--------------------- #
         if type == "MissedPlaced":
             CostOfNewState = 0
             for row in range(len(newState)):
@@ -435,6 +436,8 @@ class SearchAlgorithm():
                     if newState[row][col] != GoalState[row][col]:
                         CostOfNewState += 1
             return CostOfNewState + self.FatherCost
+        # -------------------This method is not right--------------------- #
+        # -------------------This method is not right--------------------- #
     
     def heuristics(self, newState, GoalState, type="MissedPlaced"):
         """This function calculates the cost of a state

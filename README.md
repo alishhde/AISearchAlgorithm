@@ -3,16 +3,6 @@ Search Divides into two type, one is about having information about the goal and
 1. Uninformed Search
 2. Informed Search
 
-## Uninformed Search Strategies
-The main characteristic of the Uninfomred search is to not using the information about the goal.
-
-1. Breadth-First Search (BFS)
-2. Uniform-Cost Search (UCS)
-3. Depth-First Search (DFS)
-4. Depth-Limited Search (DLS)
-5. Iterative Deepening Search (IDS)
-
-
 #### Before Start
  - The process of deciding what actions and states to consider is Problem Formulation
    - States of the world
@@ -41,6 +31,14 @@ This algorithm makes a frontier list and every time choose a state from that fro
 ![image](https://user-images.githubusercontent.com/45999644/143463203-7d5e8c29-07a8-4795-9818-0bddd0f3e775.png)
 
 This algorithm makes a frontier list and also a explored list. Every time chooses a state from that frontier with a strategy (e.g. UCS, DFS, etc.) and it checks that, the state that has been choosen was not been seen before.
+## Uninformed Search Strategies
+The main characteristic of the Uninfomred search is to not using the information about the goal.
+
+1. Breadth-First Search (BFS)
+2. Uniform-Cost Search (UCS)
+3. Depth-First Search (DFS)
+4. Depth-Limited Search (DLS)
+5. Iterative Deepening Search (IDS)
 
 ### Depth-First Search
 - DFS strategy is to expand the deepest node first. 

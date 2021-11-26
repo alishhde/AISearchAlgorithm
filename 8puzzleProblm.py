@@ -4,9 +4,17 @@ import AISearchAlgorithm
 Search = AISearchAlgorithm.SearchAlgorithm()
 initialState = [
     [1, 2, 3],
-    [6, " ", 4],
-    [7, 8, 5]
+    [7, 8, 4],
+    [6, " ", 5]
 ]
+
+# This can not be found easily
+# initialState = [
+#     [1, 2, 3],
+#     [6, " ", 4],
+#     [7, 8, 5]
+# ]
+
 
 GoalState = [
     [1, 2, 3],

@@ -250,7 +250,7 @@ class SearchAlgorithm():
                     # break
                     
                 if currentState == GoalState:
-                    print("The path has been found.")
+                    print(f"The path has been found at iterate {counter}")
                     return explored
                 
             else:
@@ -310,7 +310,7 @@ class SearchAlgorithm():
                     # break
                     
                 if currentState == GoalState:
-                    print("The path has been found.")
+                    print(f"The path has been found at iterate {counter}")
                     return explored
                 
             else:

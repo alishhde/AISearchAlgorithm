@@ -213,7 +213,68 @@ class SearchAlgorithm():
             
     
     def searchIDS(self):
+        """ DLS Has problem. """
         pass
+    
+    def searchUCS(self, initialState, GoalState, spaceGraph=[]):
+        """This algorithm will return the solution path.
+
+        Args:
+            initialState (List): Start state.
+            GoalState (list): End state.
+            spaceGraph (list): For the time user enter his graph states.
+        """
+        if spaceGraph == []:
+            currentState = list()
+            self.fringe = list()
+            self.cost = [0]
+            explored = list()
+            parentStates = list()
+            
+            currentState = initialState
+            self.fringe.append(currentState)
+            
+        else:
+            # we don't need to calculate the childs.
+            pass
+        counter = 0 
+        while True:
+            
+            # step 1
+            if currentState not in explored:
+                explored.append(currentState)
+                
+                print("\n\n", "This is currrent state: ", "\n\n")
+                for i in currentState:
+                    print(i)
+                
+                # if counter == 1000:
+                    # break
+                
+                if currentState == GoalState:
+                    print("The path has been found.")
+                    return explored
+                
+            else:
+                # current state is in explored list
+                pass
+            
+            # step 2 - deleting the currentstate from the fringe and cost
+            currentStateIndex = self.fringe.index(currentState)
+            del self.fringe[currentStateIndex]
+            self.FatherCost = self.cost[currentStateIndex]
+            del self.cost[currentStateIndex]
+            
+            # now we must calculate the child of the currentstate and add them to the frontier 
+            # In this code our default problem is 8 puzzle problem
+            self.updateFringe(currentState, explored, GoalState, algorithmType="UCS")
+            
+            # Step 3 - Choosing the state we minimum cost
+            minimumCost = min(self.cost)
+            minimumCostIndex = self.cost.index(minimumCost)
+            currentState = self.fringe[minimumCostIndex]
+            
+            counter += 1
     
     def searchAstar(self):
         pass
@@ -221,11 +282,7 @@ class SearchAlgorithm():
     def searchGreedy(self):
         pass
 
-    def searchUCS(self):
-        pass
-
-
-    def updateFringe(self, currentState, parents, problem="eightPuzzle"):
+    def updateFringe(self, currentState, parents, GoalState, algorithmType="", problem="eightPuzzle"):
         """
         as we are solving 8 puzzle, we describe it here,
             1- First we must find the space in the 8 puzzle.
@@ -294,6 +351,28 @@ class SearchAlgorithm():
                 if newstate in parents or newstate in self.fringe:
                     continue
                 else:
-                    self.fringe.append(newstate)
+                    if algorithmType == "UCS":
+                        self.fringe.append(newstate)
+                        self.cost.append(self.heuristic(newstate, GoalState, type="MissedPlaced"))
+                    
+                    elif algorithmType == "":
+                        self.fringe.append(newstate)
+                        
             
             return self.fringe # A list of all the next states
+    
+    def heuristic(self, newState, GoalState, type="MissedPlaced"):
+        """This function calculates the cost of a state
+
+        Args:
+            newState (list): The state is a a of three list
+            type (str, optional):  Defaults to "MissedPlaced".
+        """
+        if type == "MissedPlaced":
+            CostOfNewState = 0
+            for row in range(len(newState)):
+                for col in  range(len(GoalState)):
+                    if newState[row][col] != GoalState[row][col]:
+                        CostOfNewState += 1
+            return CostOfNewState + self.FatherCost
+    

@@ -29,10 +29,12 @@ Uninformed Search Strategies:
 
 #### General Tree Search
 ![image](https://user-images.githubusercontent.com/45999644/143463346-50dc1f5a-76f7-42ca-8fe5-e7dfd797f5c3.png)
+
 This algorithm makes a frontier list and every time choose a state from that frontier with a strategy (e.g. UCS, DFS, etc.)
 
 #### General Graph Search
 ![image](https://user-images.githubusercontent.com/45999644/143463203-7d5e8c29-07a8-4795-9818-0bddd0f3e775.png)
+
 This algorithm makes a frontier list and also a explored list. Every time chooses a state from that frontier with a strategy (e.g. UCS, DFS, etc.) and it checks that, the state that has been choosen was not been seen before.
 
 ## Depth-First Search
@@ -45,4 +47,10 @@ This algorithm makes a frontier list and also a explored list. Every time choose
 - Its frontier is _FIFO (First in first out = queue)_
 - It returns the solution by the time it reaches to it.
 
+## Depth-limited Search
 
+## Iterative-deepening Search
+
+## Uniform-Cost Search
+
+## A* Search

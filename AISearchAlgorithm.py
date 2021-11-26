@@ -1,9 +1,8 @@
-# 										                                                     Writer of this code:
-# 								                                                        Seyyed Ali Shohadaalhosseini
+# Writer of this code:
+# Seyyed Ali Shohadaalhosseini
 
-#                                                                                          We'll never forget that:
-#
-# 			        	                                                        < What doesn't kill you makes you STRONGER >
+# We'll never forget that:
+#                        < What doesn't kill you makes you STRONGER >
 
 class SearchAlgorithm():
     """

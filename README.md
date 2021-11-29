@@ -51,7 +51,9 @@ The main characteristic of the Uninfomred search is to not using the information
 - It returns the solution by the time it reaches to it.
 
 ### Depth-limited Search
-
+In this search we have a depth limitation and we only wants to use dfs only to that limit.
+The algorithm we have use for this search is like below:
+If _l_ is the limitation for our problem, we go deep untill we reach the state at depth _l-1_ In this depth we are searching for the state of this depth, we know that we can go one depth more So, here we have a loop to loop through the states of this depth(_l-1_) then we add each of these states to the fringe list and now we only need to select the state from the fringe queue and as the search is DFS so the strategy for selection is to select LIFO. 
 ### Iterative-deepening Search
 
 ### Uniform-Cost Search

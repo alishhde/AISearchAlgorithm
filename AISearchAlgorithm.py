@@ -126,7 +126,7 @@ class SearchAlgorithm():
             # counter += 1
             
     def searchDLS(self, initialState, GoalState, limitation, spaceGraph=[]):
-        ## This algorithms problem is that it does not calculate therest children of the last depth
+        ## This algorithms problem is that it does not calculate the rest children of the last depth
         """This algorithm is depth limited search and will return the solution path. 
 
         Args:
@@ -140,7 +140,7 @@ class SearchAlgorithm():
             explored = list()
             parentStates = list()
             pathexplored = list()
-            
+            self.limitation = limitation
             currentState = initialState
             self.fringe.append(currentState)
             
@@ -148,10 +148,10 @@ class SearchAlgorithm():
             # we don't need to calculate the childs.
             pass
         counter = 0 
-        limitCounter = 0
+        self.limitCounter = 0
         while True:
             
-            if limitCounter == limitation:
+            if self.limitCounter == self.limitation:
                 # step 1
                 if currentState not in explored:
                     explored.append(currentState)
@@ -204,12 +204,19 @@ class SearchAlgorithm():
                 
                 # now we must calculate the child of the currentstate and add them to the frontier 
                 # In this code our default problem is 8 puzzle problem
-                self.updateFringe(currentState, explored)
+                if self.limitCounter == self.limitation:
+                     # Step 3
+                    currentState = self.fringe[-1]
                 
-                # Step 3
-                currentState = self.fringe[-1]
+                else:
+                    self.limitCounter += 1
+                    self.updateFringe(currentState, explored, algorithmType="DLS")
+                    if self.limitCounter+1 == limitation:
+                        self.limitCounter += 1
+                        
+                    # Step 3
+                    currentState = self.fringe[-1]
                 
-                limitCounter += 1
         
             # counter += 1
             
@@ -341,7 +348,7 @@ class SearchAlgorithm():
     def searchAstar(self):
         pass
 
-    def updateFringe(self, currentState, parents, GoalState, algorithmType="", problem="eightPuzzle"):
+    def updateFringe(self, currentState, parents, GoalState, algorithmType="", problem="eightPuzzle", callInMethod=False):
         """
         as we are solving 8 puzzle, we describe it here,
             1- First we must find the space in the 8 puzzle.
@@ -387,16 +394,16 @@ class SearchAlgorithm():
             # 2- In the next lines we are going to add all the possible state's index
             availableMoveIndexForSpace = list()
             domain = [0, 1, 2]
-            if (spaceIndex[0] - 1) in domain:
+            if (spaceIndex[0] - 1) in domain: # Upper Row
                 availableMoveIndexForSpace.append((spaceIndex[0] - 1, spaceIndex[1]))
 
-            if (spaceIndex[0] + 1) in domain:
+            if (spaceIndex[0] + 1) in domain: # Lower Row
                 availableMoveIndexForSpace.append((spaceIndex[0] + 1, spaceIndex[1]))
 
-            if (spaceIndex[1] - 1) in domain:
+            if (spaceIndex[1] - 1) in domain: # Left Column
                 availableMoveIndexForSpace.append((spaceIndex[0], spaceIndex[1] - 1))
                 
-            if (spaceIndex[1] + 1) in domain:
+            if (spaceIndex[1] + 1) in domain: # Right Column
                 availableMoveIndexForSpace.append((spaceIndex[0], spaceIndex[1] + 1))    
             
             # 3- Now we must create those states and return all thenext states we have
@@ -417,6 +424,15 @@ class SearchAlgorithm():
                     elif algorithmType == "Greedy":
                         self.fringe.append(newstate)
                         self.cost.append(self.heuristics(newstate, GoalState, type="MissedPlaced"))
+                    
+                    elif algorithmType == "DLS":
+                        if callInMethod:
+                            self.fringe.insert(self.newstateINDEX, newstate)
+                        if self.limitCounter+1 == limitation and not(callInMethod):
+                            self.fringe.append(newstate)
+                            self.newstateINDEX = self.fringe.index(newstate)
+                            self.updateFringe(newstate, explored, algorithmType="DLS", callInMethod=True)
+                        self.fringe.append(newstate)
                     
                     elif algorithmType == "":
                         self.fringe.append(newstate)

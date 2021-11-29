@@ -14,6 +14,7 @@ class SearchAlgorithm():
         pass
     
     def searchDFS(self, initialState, GoalState, spaceGraph=[]):
+        ## DONE Successfully
         """This algorithm will return the solution path.
 
         Args:
@@ -68,6 +69,7 @@ class SearchAlgorithm():
             counter += 1
             
     def searchBFS(self, initialState, GoalState, spaceGraph=[]):
+        ## DONE Successfully
         """This algorithm will return the solution path.
 
         Args:
@@ -124,6 +126,7 @@ class SearchAlgorithm():
             # counter += 1
             
     def searchDLS(self, initialState, GoalState, limitation, spaceGraph=[]):
+        ## This algorithms problem is that it does not calculate therest children of the last depth
         """This algorithm is depth limited search and will return the solution path. 
 
         Args:
@@ -215,6 +218,7 @@ class SearchAlgorithm():
         pass
     
     def searchUCS(self, initialState, GoalState, spaceGraph=[]):
+        ## This algorithms problem is that we can not define the cost for the new nodes
         """This algorithm will return the solution path.
 
         Args:
@@ -275,6 +279,7 @@ class SearchAlgorithm():
             counter += 1
     
     def searchGreedy(self, initialState, GoalState, spaceGraph=[]):
+        ## DONE Successfully
         """This algorithm will return the solution path.
 
         Args:

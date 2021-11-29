@@ -210,10 +210,18 @@ class SearchAlgorithm():
                 
                 else:
                     self.limitCounter += 1
-                    self.updateFringe(currentState, explored, algorithmType="DLS")
+                    self.updateFringe(currentState, explored, GoalState, algorithmType="DLS")
                     if self.limitCounter+1 == limitation:
                         self.limitCounter += 1
-                        
+                    
+                    print("This is our fringe state: ")
+                    print(self.fringe)
+                    # for i in self.fringe:
+                    #     print(f"State {i}")
+                    #     for j in i:
+                    #         print(j)
+                            
+                    raise Exception
                     # Step 3
                     currentState = self.fringe[-1]
                 
@@ -428,11 +436,12 @@ class SearchAlgorithm():
                     elif algorithmType == "DLS":
                         if callInMethod:
                             self.fringe.insert(self.newstateINDEX, newstate)
-                        if self.limitCounter+1 == limitation and not(callInMethod):
+                        if self.limitCounter+1 == self.limitation and not(callInMethod):
                             self.fringe.append(newstate)
-                            self.newstateINDEX = self.fringe.index(newstate)
-                            self.updateFringe(newstate, explored, algorithmType="DLS", callInMethod=True)
-                        self.fringe.append(newstate)
+                            self.newstateINDEX = self.fringe.index(newstate) - 1
+                            self.updateFringe(newstate, parents, GoalState, algorithmType="DLS", callInMethod=True)
+                        else:
+                            self.fringe.append(newstate)
                     
                     elif algorithmType == "":
                         self.fringe.append(newstate)

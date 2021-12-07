@@ -435,13 +435,22 @@ class SearchAlgorithm():
                     
                     elif algorithmType == "DLS":
                         if callInMethod:
-                            self.fringe.insert(self.newstateINDEX, newstate)
+                            if newstate in self.fringe:
+                                pass
+                            else:
+                                self.fringe.insert(self.newstateINDEX, newstate)
                         if self.limitCounter+1 == self.limitation and not(callInMethod):
-                            self.fringe.append(newstate)
-                            self.newstateINDEX = self.fringe.index(newstate) - 1
-                            self.updateFringe(newstate, parents, GoalState, algorithmType="DLS", callInMethod=True)
+                            if newstate in self.fringe:
+                                pass
+                            else:
+                                self.fringe.append(newstate)
+                                self.newstateINDEX = self.fringe.index(newstate) - 1
+                                self.updateFringe(newstate, parents, GoalState, algorithmType="DLS", callInMethod=True)
                         else:
-                            self.fringe.append(newstate)
+                            if newstate in self.fringe:
+                                pass
+                            else:
+                                self.fringe.append(newstate)
                     
                     elif algorithmType == "":
                         self.fringe.append(newstate)

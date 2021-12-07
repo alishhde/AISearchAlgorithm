@@ -24,6 +24,16 @@ GoalState = [
 
 # print(Search.searchDFS(initialState, GoalState))
 # print(Search.searchBFS(initialState, GoalState))
-print(Search.searchDLS(initialState, GoalState, 2), sep=" === > \n\n")
+print(Search.searchDLS(initialState, GoalState, 28), sep=" === > \n\n")
+# print(Search.searchIDS(initialState, GoalState), sep=" === > \n\n")
 # print(Search.searchUCS(initialState, GoalState), sep=" === > \n\n")
 # print(Search.searchGreedy(initialState, GoalState), sep=" === > \n\n")
+
+
+# """ DLS Has problem. """
+#         depthCounter = 0
+#         while not self.answerFLAG:
+#             answerIs = self.searchDLS(initialState, GoalState, depthCounter)
+#         else:
+#             print(f"This didn't kill you too, the path found at the depth {depthCounter} ;)")
+#             return answerIs

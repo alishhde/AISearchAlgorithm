@@ -126,7 +126,7 @@ class SearchAlgorithm():
             # counter += 1
             
     def searchDLS(self, initialState, GoalState, limitation, spaceGraph=[]):
-        ## This algorithms problem is that it does not calculate the rest children of the last depth
+        ## DONE Successfully
         """This algorithm is depth limited search and will return the solution path. 
 
         Args:
@@ -165,6 +165,7 @@ class SearchAlgorithm():
                     
                     if currentState == GoalState:
                         print("The path has been found.")
+                        self.answerFLAG = True
                         return explored
                 else:
                     # current state is in explored list
@@ -221,7 +222,6 @@ class SearchAlgorithm():
                     #     for j in i:
                     #         print(j)
                             
-                    raise Exception
                     # Step 3
                     currentState = self.fringe[-1]
                 
@@ -229,8 +229,14 @@ class SearchAlgorithm():
             # counter += 1
             
     def searchIDS(self, initialState, GoalState, spaceGraph=[]):
-        """ DLS Has problem. """
-        pass
+        ## DONE Successfully
+        depthCounter = 26
+        self.answerFLAG = False
+        while not self.answerFLAG:
+            answerIs = self.searchDLS(initialState, GoalState, depthCounter)
+        else:
+            print(f"This didn't kill you too, the path found at the depth {depthCounter} ;)")
+            return answerIs
     
     def searchUCS(self, initialState, GoalState, spaceGraph=[]):
         ## This algorithms problem is that we can not define the cost for the new nodes

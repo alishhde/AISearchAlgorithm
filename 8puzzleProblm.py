@@ -1,4 +1,4 @@
-# Writer of this code:
+# Written by
 # Seyyed Ali Shohadaalhosseini
 
 # We'll never forget that:
@@ -41,30 +41,30 @@ while ans == "y":
         Enter ASTAR as A Star Search\n
         Enter GREEDY as Greedy Search\n
         Enter HILL as Hill Climbing Search: \n
-        Enter the name here: """)
+        Enter the name here: """).lower()
     
-    if WhichAlgorithm == "DFS":
+    if WhichAlgorithm == "DFS".lower():
         print(Search.searchDFS(initialState, GoalState))
         
-    elif WhichAlgorithm == "BFS":
+    elif WhichAlgorithm == "BFS".lower():
         print(Search.searchBFS(initialState, GoalState))
         
-    elif WhichAlgorithm == "DLS":
+    elif WhichAlgorithm == "DLS".lower():
         print(Search.searchDLS(initialState, GoalState, 28), sep=" === > \n\n")
 
-    elif WhichAlgorithm == "IDS":
+    elif WhichAlgorithm == "IDS".lower():
         print(Search.searchIDS(initialState, GoalState), sep=" === > \n\n")
 
-    elif WhichAlgorithm == "UCS":
+    elif WhichAlgorithm == "UCS".lower():
         print(Search.searchUCS(initialState, GoalState), sep=" === > \n\n")
         
-    elif WhichAlgorithm == "ASTAR":
+    elif WhichAlgorithm == "ASTAR".lower():
         print(Search.searchAstar(initialState, GoalState), sep=" === > \n\n")
         
-    elif WhichAlgorithm == "GREEDY":
+    elif WhichAlgorithm == "GREEDY".lower():
         print(Search.searchGreedy(initialState, GoalState), sep=" === > \n\n")
         
-    elif WhichAlgorithm == "HILL":
+    elif WhichAlgorithm == "HILL".lower():
         print(Search.searchHillClimbing(initialState, GoalState), sep=" === > \n\n")
     
     ans = input("Do you want to continue ? y/n ")

@@ -1,4 +1,4 @@
-# Writer of this code:
+# Written by
 # Seyyed Ali Shohadaalhosseini
 
 # We'll never forget that:

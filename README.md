@@ -55,8 +55,11 @@ In this search we have a depth limitation and we only wants to use dfs only to t
 The algorithm we have use for this search is like below:
 If _l_ is the limitation for our problem, we go deep untill we reach the state at depth _l-1_ In this depth we are searching for the state of this depth, we know that we can go one depth more So, here we have a loop to loop through the states of this depth(_l-1_) then we add each of these states to the fringe list and now we only need to select the state from the fringe queue and as the search is DFS so the strategy for selection is to select LIFO. 
 ### Iterative-deepening Search
+This algorithm uses DLS algorithm with a range of limit from 1 to the n and each time calls the DLS algorithm with the limited value, e.g. first time in the loop calls DLS with the limit == 1, second round limit == 2 ...
 
 ### Uniform-Cost Search
+This algorithm's strategy is that it expands the cheapest first node in the frontier. So the queue in this algorithm is priority and this priority is base on the cost of each node. This cost evaluates with the G(n) function. It is a function that calculates the cost from the first node to the node we want to go, so the cost from the start node to that is matter not the cost it will take to reach the goal.
+The problem always choose the type of the G(n), and here in our problem the cost equals to the depth of the node.
 
 ## Informed Search
 The main characteristic of the informed search is using some information about the goal, to reach the Goal. These types of search method uses a heuristics function to evaluate the cost from the current state to the Goal state.

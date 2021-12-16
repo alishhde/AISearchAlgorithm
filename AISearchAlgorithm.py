@@ -362,6 +362,25 @@ class SearchAlgorithm():
     def searchAstar(self):
         pass
 
+    def seachHillClimbing(self, initialState, GoalState, spaceGraph=[]):
+        ## we are working on it
+        """This algorithm will return the solution path.
+
+        Args:
+            initialState (List): Start state.
+            GoalState (list): End state.
+            spaceGraph (list): For the time user enter his graph states.
+        """
+        # Step 1
+        currentState = initialState
+        
+        # Step loop
+        while currentState != GoalState:
+            pass
+        else:
+            return currentState
+        
+    
     def updateFringe(self, currentState, parents, GoalState, algorithmType="", problem="eightPuzzle", callInMethod=False):
         """
         as we are solving 8 puzzle, we describe it here,
@@ -428,7 +447,11 @@ class SearchAlgorithm():
                 newstate = deepcopy(currentState)
                 newstate[spaceIndex[0]][spaceIndex[1]], newstate[moveIndex[0]][moveIndex[1]] = newstate[moveIndex[0]][moveIndex[1]], newstate[spaceIndex[0]][spaceIndex[1]]
                 
-                if newstate in parents or newstate in self.fringe:
+                if algorithmType == "HillClimbing":
+                    """ Only add the state to a list and finish adding all the next states"""
+                    pass
+                
+                elif newstate in parents or newstate in self.fringe:
                     continue
                 else:
                     if algorithmType == "UCS":

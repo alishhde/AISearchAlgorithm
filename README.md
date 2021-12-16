@@ -71,3 +71,9 @@ Greedy search expands the node that appears to be closest to goal, So its priori
 
 ### A* Search
 This algorithm has a evaluation function _F(n) = G(n) + h(n)_. This algorithm each time choose the state with lowest F(n) value. So F(n) value defines the priority in the frontier.
+
+#### Other search algorithm
+
+### Hill Climbing Search 
+In this algorithm, we have a initial state, we look for its neighbors and we choose the neighbor with the best value between the neighbors and then we compare this value with the value of the current state, if the value is better we'll go to that state. The below is our algorithm:
+![image](https://user-images.githubusercontent.com/45999644/146355261-f4611a44-4387-44f1-8637-1693869552bd.png)

@@ -65,7 +65,7 @@ class SearchAlgorithm():
             
             # now we must calculate the child of the currentstate and add them to the frontier 
             # In this code our default problem is 8 puzzle problem
-            self.updateFringe(currentState, explored)
+            self.updateFringe(currentState, explored, GoalState)
             
             # Step 3
             currentState = self.fringe[-1]
@@ -122,7 +122,7 @@ class SearchAlgorithm():
             
             # now we must calculate the child of the currentstate and add them to the frontier 
             # In this code our default problem is 8 puzzle problem
-            self.updateFringe(currentState, explored)
+            self.updateFringe(currentState, explored, GoalState)
             
             # Step 3
             currentState = self.fringe[0]
@@ -243,7 +243,7 @@ class SearchAlgorithm():
             return answerIs
     
     def searchUCS(self, initialState, GoalState, spaceGraph=[]):
-        ## This algorithms problem is that we can not define the cost for the new nodes
+        ## Temporary Done
         """This algorithm will return the solution path.
 
         Args:
@@ -258,7 +258,7 @@ class SearchAlgorithm():
             explored = list()
             parentStates = list()
             
-            currentState = initialState
+            currentState = deepcopy(initialState)
             self.fringe.append(currentState)
             
         else:
@@ -271,9 +271,9 @@ class SearchAlgorithm():
             if currentState not in explored:
                 explored.append(currentState)
                 
-                print("\n\n", "This is currrent state: ", "\n\n")
-                for i in currentState:
-                    print(i)
+                # print("\n\n", "This is currrent state: ", "\n\n")
+                # for i in currentState:
+                #     print(i)
                 
                 # if counter == 1000:
                     # break
@@ -291,7 +291,7 @@ class SearchAlgorithm():
             del self.fringe[currentStateIndex]
             self.FatherCost = self.cost[currentStateIndex]
             del self.cost[currentStateIndex]
-            
+            print(self.FatherCost)
             # now we must calculate the child of the currentstate and add them to the frontier 
             # In this code our default problem is 8 puzzle problem
             self.updateFringe(currentState, explored, GoalState, algorithmType="UCS")
@@ -363,8 +363,66 @@ class SearchAlgorithm():
             
             counter += 1
     
-    def searchAstar(self):
-        pass
+    def searchAstar(self, initialState, GoalState, spaceGraph=[]):
+        ## Temporary Done
+        """This algorithm will return the solution path.
+
+        Args:
+            initialState (List): Start state.
+            GoalState (list): End state.
+            spaceGraph (list): For the time user enter his graph states.
+        """
+        if spaceGraph == []:
+            currentState = list()
+            self.fringe = list()
+            self.cost = [0]
+            explored = list()
+            parentStates = list()
+            
+            currentState = deepcopy(initialState)
+            self.fringe.append(currentState)
+            
+        else:
+            # we don't need to calculate the childs.
+            pass
+        counter = 0 
+        while True:
+            
+            # step 1
+            if currentState not in explored:
+                explored.append(currentState)
+                
+                # print("\n\n", "This is currrent state: ", "\n\n")
+                # for i in currentState:
+                #     print(i)
+                
+                # if counter == 1000:
+                    # break
+                    
+                if currentState == GoalState:
+                    print(f"The path has been found at iterate {counter}")
+                    return explored
+                
+            else:
+                # current state is in explored list
+                pass
+            
+            # step 2 - deleting the currentstate from the fringe and cost
+            currentStateIndex = self.fringe.index(currentState)
+            del self.fringe[currentStateIndex]
+            self.FatherCost = self.cost[currentStateIndex]
+            del self.cost[currentStateIndex]
+            print(self.FatherCost)
+            # now we must calculate the child of the currentstate and add them to the frontier 
+            # In this code our default problem is 8 puzzle problem
+            self.updateFringe(currentState, explored, GoalState, algorithmType="Astar")
+            
+            # Step 3 - Choosing the state we minimum cost
+            minimumCost = min(self.cost)
+            minimumCostIndex = self.cost.index(minimumCost)
+            currentState = self.fringe[minimumCostIndex]
+            
+            counter += 1
 
     def searchHillClimbing(self, initialState, GoalState, spaceGraph=[]):
         ## Done successfully
@@ -499,7 +557,14 @@ class SearchAlgorithm():
                 else:
                     if algorithmType == "UCS":
                         self.fringe.append(newstate)
-                        self.cost.append(self.CostCalculator(newstate, GoalState, type="MissedPlaced"))
+                        self.cost.append(self.CostCalculator(newstate, GoalState, type="OnDepthCount"))
+                    elif algorithmType == "Astar":
+                        self.fringe.append(newstate)
+                        gn = self.CostCalculator(newstate, GoalState, type="OnDepthCount")
+                        hn = self.heuristics(newstate, GoalState, type="MissedPlaced")
+                        fn = gn + hn
+                        self.cost.append(hn)
+                        pass
                     
                     elif algorithmType == "Greedy":
                         self.fringe.append(newstate)
@@ -529,26 +594,17 @@ class SearchAlgorithm():
                         
             return self.fringe # A list of all the next states
     
-    def CostCalculator(self, newState, GoalState, type="MissedPlaced"):
+    def CostCalculator(self, newState, GoalState, type="OnDepthCount"):
         # This function has problem
         """This function calculates the cost of a state
         This function calculates the G(n)
 
         Args:
             newState (list): The state is a a of three list
-            type (str, optional):  Defaults to "MissedPlaced".
+            type (str, optional):  Defaults to "OnDepthCount".
         """
-        # -------------------This method is not right--------------------- #
-        # -------------------This method is not right--------------------- #
-        if type == "MissedPlaced":
-            CostOfNewState = 0
-            for row in range(len(newState)):
-                for col in  range(len(GoalState)):
-                    if newState[row][col] != GoalState[row][col]:
-                        CostOfNewState += 1
-            return CostOfNewState + self.FatherCost
-        # -------------------This method is not right--------------------- #
-        # -------------------This method is not right--------------------- #
+        # -------------------This must be check more--------------------- #
+        return 1 + self.FatherCost
     
     def heuristics(self, newState, GoalState, type="MissedPlaced"):
         # Done successfully

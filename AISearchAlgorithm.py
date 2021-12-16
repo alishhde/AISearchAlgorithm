@@ -367,7 +367,7 @@ class SearchAlgorithm():
         pass
 
     def searchHillClimbing(self, initialState, GoalState, spaceGraph=[]):
-        ## we are working on it
+        ## Done successfully
         """This algorithm will return the solution path.
 
         Args:

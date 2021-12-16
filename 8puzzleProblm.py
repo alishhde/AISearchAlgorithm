@@ -2,6 +2,7 @@ import AISearchAlgorithm
 
 
 Search = AISearchAlgorithm.SearchAlgorithm()
+
 initialState = [
     [1, 2, 3],
     [7, 8, 4],
@@ -24,10 +25,11 @@ GoalState = [
 
 # print(Search.searchDFS(initialState, GoalState))
 # print(Search.searchBFS(initialState, GoalState))
-print(Search.searchDLS(initialState, GoalState, 28), sep=" === > \n\n")
+# print(Search.searchDLS(initialState, GoalState, 28), sep=" === > \n\n")
 # print(Search.searchIDS(initialState, GoalState), sep=" === > \n\n")
 # print(Search.searchUCS(initialState, GoalState), sep=" === > \n\n")
 # print(Search.searchGreedy(initialState, GoalState), sep=" === > \n\n")
+print(Search.seachHillClimbing(initialState, GoalState), sep=" === > \n\n")
 
 
 # """ DLS Has problem. """

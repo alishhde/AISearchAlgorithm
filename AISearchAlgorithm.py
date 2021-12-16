@@ -4,6 +4,9 @@
 # We'll never forget that:
 #                        < What doesn't kill you makes you STRONGER >
 
+from random import shuffle
+from copy import deepcopy
+
 class SearchAlgorithm():
     """
         This module contains all the AI Search Algorithm.
@@ -373,14 +376,14 @@ class SearchAlgorithm():
         """
         # Step 1
         currentState = initialState
-        HillsNeighbor = []
-        explored = []
+        explored = [] # We don't use this in hillClimbing. it is for not getting error
         
         # Step 2 - loop
         while currentState != GoalState:
             
             # Step 3
-            self.updateFringe(currentState, explored, GoalState, algorithmType="HillClimbing")
+            self.fringe = []
+            self.updateFringe(currentState, explored, GoalState, algorithmType="")
             
             # Step 4
             statesCost = []
@@ -392,22 +395,33 @@ class SearchAlgorithm():
             
             currentValue = self.heuristics(currentState, GoalState)
             
-            # Step 5
+            # Step 5, 6
             if currentValue > maxValue:
-                continue
+                # we are trap into the local Maximum
+                # now we must have random restart
+                # we do this by creating a random state
+                currentState = self.random8PuzzleCreator()
             else:
                 currentState = self.fringe[maxValueIndex]
             
-            # Step 6
-            
-            
-            # Last Step empty the self.fringe
-            self.fringe = []
         else:
             return currentState
+                        
+    def random8PuzzleCreator(self):
+        # Done successfully
+        """
+            we want a list, consist of three list that 
+            each list consists three value
+            
+            """
+        states = [[1, 2, 3], [4, 5, 6], [7, 8, " "]]
+        shuffle(states)
+        for row in states:
+            shuffle(row)
+        return states
         
-    
     def updateFringe(self, currentState, parents, GoalState, algorithmType="", problem="eightPuzzle", callInMethod=False):
+        # Done successfully
         """
         as we are solving 8 puzzle, we describe it here,
             1- First we must find the space in the 8 puzzle.
@@ -466,7 +480,6 @@ class SearchAlgorithm():
                 availableMoveIndexForSpace.append((spaceIndex[0], spaceIndex[1] + 1))    
             
             # 3- Now we must create those states and return all thenext states we have
-            from copy import deepcopy
             for moveIndex in availableMoveIndexForSpace:
                 # Here we must change the space and the number
                 newstate = []
@@ -509,6 +522,7 @@ class SearchAlgorithm():
             return self.fringe # A list of all the next states
     
     def CostCalculator(self, newState, GoalState, type="MissedPlaced"):
+        # This function has problem
         """This function calculates the cost of a state
         This function calculates the G(n)
 
@@ -529,6 +543,7 @@ class SearchAlgorithm():
         # -------------------This method is not right--------------------- #
     
     def heuristics(self, newState, GoalState, type="MissedPlaced"):
+        # Done successfully
         """This function calculates the cost of a state
 
         Args:

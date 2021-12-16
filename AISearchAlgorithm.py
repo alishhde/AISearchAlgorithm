@@ -6,6 +6,7 @@
 
 from random import shuffle
 from copy import deepcopy
+from time import sleep
 
 class SearchAlgorithm():
     """
@@ -365,7 +366,7 @@ class SearchAlgorithm():
     def searchAstar(self):
         pass
 
-    def seachHillClimbing(self, initialState, GoalState, spaceGraph=[]):
+    def searchHillClimbing(self, initialState, GoalState, spaceGraph=[]):
         ## we are working on it
         """This algorithm will return the solution path.
 
@@ -375,7 +376,7 @@ class SearchAlgorithm():
             spaceGraph (list): For the time user enter his graph states.
         """
         # Step 1
-        currentState = initialState
+        currentState = deepcopy(initialState)
         explored = [] # We don't use this in hillClimbing. it is for not getting error
         
         # Step 2 - loop
@@ -390,19 +391,26 @@ class SearchAlgorithm():
             for state in self.fringe:
                 cst = self.heuristics(state, GoalState)
                 statesCost.append(cst)
-            maxValue = max(statesCost)
-            maxValueIndex = statesCost.index(maxValue)
+            minValue = min(statesCost)
+            minValueIndex = statesCost.index(minValue)
             
+        
             currentValue = self.heuristics(currentState, GoalState)
             
+            # print(self.fringe, self.fringe[minValueIndex], minValue, currentState, currentValue, sep="\n")
+            # raise NotImplementedError
+        
             # Step 5, 6
-            if currentValue > maxValue:
+            if currentValue < minValue: # Lower because, lower heuristic means we are closer to the goal
                 # we are trap into the local Maximum
                 # now we must have random restart
                 # we do this by creating a random state
+                print(currentValue)
+                print("we are restarting..")
+                sleep(3)
                 currentState = self.random8PuzzleCreator()
             else:
-                currentState = self.fringe[maxValueIndex]
+                currentState = self.fringe[minValueIndex]
             
         else:
             return currentState

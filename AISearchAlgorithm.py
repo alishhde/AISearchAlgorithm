@@ -373,10 +373,36 @@ class SearchAlgorithm():
         """
         # Step 1
         currentState = initialState
+        HillsNeighbor = []
+        explored = []
         
-        # Step loop
+        # Step 2 - loop
         while currentState != GoalState:
-            pass
+            
+            # Step 3
+            self.updateFringe(currentState, explored, GoalState, algorithmType="HillClimbing")
+            
+            # Step 4
+            statesCost = []
+            for state in self.fringe:
+                cst = self.heuristics(state, GoalState)
+                statesCost.append(cst)
+            maxValue = max(statesCost)
+            maxValueIndex = statesCost.index(maxValue)
+            
+            currentValue = self.heuristics(currentState, GoalState)
+            
+            # Step 5
+            if currentValue > maxValue:
+                continue
+            else:
+                currentState = self.fringe[maxValueIndex]
+            
+            # Step 6
+            
+            
+            # Last Step empty the self.fringe
+            self.fringe = []
         else:
             return currentState
         
@@ -447,11 +473,7 @@ class SearchAlgorithm():
                 newstate = deepcopy(currentState)
                 newstate[spaceIndex[0]][spaceIndex[1]], newstate[moveIndex[0]][moveIndex[1]] = newstate[moveIndex[0]][moveIndex[1]], newstate[spaceIndex[0]][spaceIndex[1]]
                 
-                if algorithmType == "HillClimbing":
-                    """ Only add the state to a list and finish adding all the next states"""
-                    pass
-                
-                elif newstate in parents or newstate in self.fringe:
+                if newstate in parents or newstate in self.fringe:
                     continue
                 else:
                     if algorithmType == "UCS":
@@ -484,11 +506,11 @@ class SearchAlgorithm():
                     elif algorithmType == "":
                         self.fringe.append(newstate)
                         
-            
             return self.fringe # A list of all the next states
     
     def CostCalculator(self, newState, GoalState, type="MissedPlaced"):
         """This function calculates the cost of a state
+        This function calculates the G(n)
 
         Args:
             newState (list): The state is a a of three list

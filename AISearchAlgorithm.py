@@ -452,13 +452,13 @@ class SearchAlgorithm():
         """
         # Step 1
         currentState = deepcopy(initialState)
-        explored = [] # We don't use this in hillClimbing. it is for not getting error
+        explored = [] # We don't use this in hillClimbing. it is for not getting error and avoid coding more
         counter = 0
         
         # Step 2 - loop
         while currentState != GoalState:
             if counter == 1000 and self.autoFinish:
-                print("\nunfortunately we couldn't find answere after 5000-th round.\n")
+                print("\nunfortunately we couldn't find answer after 5000-th round.\n")
                 break
             
             # Step 3
@@ -500,7 +500,7 @@ class SearchAlgorithm():
         # Done successfully
         """
             we want a list, consist of three list that 
-            each list consists three value
+            each list has three value
             
             """
         states = [[1, 2, 3], [4, 5, 6], [7, 8, " "]]

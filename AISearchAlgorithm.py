@@ -484,7 +484,7 @@ class SearchAlgorithm():
                 # we are trap into the local Maximum
                 # now we must have random restart
                 # we do this by creating a random state
-                print(currentValue)
+                print(f"This is current value {currentValue} we didn't find better state.")
                 print("we are restarting..")
                 sleep(3)
                 currentState = self.random8PuzzleCreator()

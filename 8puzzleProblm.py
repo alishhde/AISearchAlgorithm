@@ -9,20 +9,23 @@ import AISearchAlgorithm
 
 Search = AISearchAlgorithm.SearchAlgorithm()
 
-# initialState = [
-#     [1, 2, 3],
-#     [7, 8, " "],
-#     [6, 5, 4]
-# ]
-
-# astar finds path at 108th state
+# easy level at finding answer 
 initialState = [
     [1, 2, 3],
-    [7, " ", 8],
+    [7, 8, " "],
     [6, 5, 4]
 ]
 
+# astar finds path at 108th state
+# medium level at finding answer 
+# initialState = [
+#     [1, 2, 3],
+#     [7, " ", 8],
+#     [6, 5, 4]
+# ]
+
 # This can not be found easily
+# very hard level at finding answer 
 # initialState = [
 #     [1, 2, 3],
 #     [6, " ", 4],

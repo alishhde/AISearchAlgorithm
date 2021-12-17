@@ -9,10 +9,17 @@ import AISearchAlgorithm
 
 Search = AISearchAlgorithm.SearchAlgorithm()
 
+# initialState = [
+#     [1, 2, 3],
+#     [7, 8, " "],
+#     [6, 5, 4]
+# ]
+
+# astar finds path at 108th state
 initialState = [
     [1, 2, 3],
-    [7, 8, 4],
-    [6, " ", 5]
+    [7, " ", 8],
+    [6, 5, 4]
 ]
 
 # This can not be found easily
@@ -50,7 +57,8 @@ while ans == "y":
         print(Search.searchBFS(initialState, GoalState))
         
     elif WhichAlgorithm == "DLS".lower():
-        print(Search.searchDLS(initialState, GoalState, 28), sep=" === > \n\n")
+        deeplimit  = int(input("Enter the depth limitation: "))
+        print(Search.searchDLS(initialState, GoalState, deeplimit), sep=" === > \n\n")
 
     elif WhichAlgorithm == "IDS".lower():
         print(Search.searchIDS(initialState, GoalState), sep=" === > \n\n")

@@ -14,8 +14,12 @@ class SearchAlgorithm():
         Just import and call the method you want with the
         required arguments.
     """
-    def __init__(self):
-        pass
+    def __init__(self, autoFinish=True):
+        """
+            Auto finish, finishes the search after 500 round, if the search doesn't find the path.
+            
+            """
+        self.autoFinish = autoFinish
     
     def searchDFS(self, initialState, GoalState, spaceGraph=[]):
         ## DONE Successfully
@@ -34,26 +38,25 @@ class SearchAlgorithm():
             
             currentState = initialState
             self.fringe.append(currentState)
-            
         else:
             # we don't need to calculate the childs.
             pass
-        counter = 0 
         
+        counter = 0 
         while True:
+            if counter == 1000 and self.autoFinish:
+                print("\nunfortunately we couldn't find answere after 5000-th round.\n")
+                break
             
             # step 1
             if currentState not in explored:
                 explored.append(currentState)
-                
-                print("\n\n", "This is currrent state: ", "\n\n")
+                print("\n\n", "This is currrent state: ", "\n")
                 for row in currentState:
                     print(row)
                     
-                if counter == 50:
-                    break
                 if currentState == GoalState:
-                    print("The path has been found.")
+                    print(f"The path has been found at round {counter}.")
                     return explored
             else:
                 # current state is in explored list
@@ -93,23 +96,22 @@ class SearchAlgorithm():
         else:
             # we don't need to calculate the childs.
             pass
-        counter = 0 
         
+        counter = 0 
         while True:
+            if counter == 1000 and self.autoFinish:
+                print("\nunfortunately we couldn't find answere after 5000-th round.\n")
+                break
             
             # step 1
             if currentState not in explored:
                 explored.append(currentState)
-                
-                print("\n\n", "This is currrent state: ", "\n\n")
+                print("\n\n", "This is currrent state: ", "\n")
                 for i in currentState:
                     print(i)
-                    
-                # if counter == 50:
-                #     break
                 
                 if currentState == GoalState:
-                    print("The path has been found.")
+                    print(f"The path has been found at round {counter}.")
                     return explored
                 
             else:
@@ -127,7 +129,7 @@ class SearchAlgorithm():
             # Step 3
             currentState = self.fringe[0]
             
-            # counter += 1
+            counter += 1
             
     def searchDLS(self, initialState, GoalState, limitation, spaceGraph=[]):
         ## DONE Successfully
@@ -154,21 +156,21 @@ class SearchAlgorithm():
         counter = 0 
         self.limitCounter = 0
         while True:
+            if counter == 1000 and self.autoFinish:
+                print("\nunfortunately we couldn't find answere after 5000-th round.\n")
+                break
             
             if self.limitCounter == self.limitation:
                 # step 1
                 if currentState not in explored:
                     explored.append(currentState)
                     
-                    print("\n\n", "This is currrent state: ", "\n\n")
+                    print("\n\n", "This is currrent state: ", "\n")
                     for row in currentState:
                         print(row)
                         
-                    # if counter == 50:
-                    #     break
-                    
                     if currentState == GoalState:
-                        print("The path has been found.")
+                        print(f"The path has been found at round {counter}.")
                         self.answerFLAG = True
                         return explored
                 else:
@@ -194,10 +196,9 @@ class SearchAlgorithm():
                     for row in currentState:
                         print(row)
                         
-                    if counter == 50:
-                        break
                     if currentState == GoalState:
-                        print("The path has been found.")
+                        print(f"The path has been found at round {counter}.")
+                        self.answerFLAG = True
                         return explored
                 else:
                     # current state is in explored list
@@ -221,25 +222,29 @@ class SearchAlgorithm():
                     
                     print("This is our fringe state: ")
                     print(self.fringe)
-                    # for i in self.fringe:
-                    #     print(f"State {i}")
-                    #     for j in i:
-                    #         print(j)
                             
                     # Step 3
                     currentState = self.fringe[-1]
                 
-        
-            # counter += 1
+            counter += 1
             
     def searchIDS(self, initialState, GoalState, spaceGraph=[]):
         ## DONE Successfully
-        depthCounter = 26
+        depthCounter = 26 # this default number is the st
         self.answerFLAG = False
+        counter = 0
         while not self.answerFLAG:
+            if counter == 100 and self.autoFinish:
+                print("\nunfortunately we couldn't find answer after 5000-th round.\n")
+                break
+            
+            # all of the algorithm in the one single line :)
             answerIs = self.searchDLS(initialState, GoalState, depthCounter)
+            
+            depthCounter += 1
+            counter += 1
         else:
-            print(f"This didn't kill you too, the path found at the depth {depthCounter} ;)")
+            print(f"This didn't kill you too, the path found at the depth {depthCounter-1} ;)")
             return answerIs
     
     def searchUCS(self, initialState, GoalState, spaceGraph=[]):
@@ -264,8 +269,12 @@ class SearchAlgorithm():
         else:
             # we don't need to calculate the childs.
             pass
+        
         counter = 0 
         while True:
+            if counter == 1000 and self.autoFinish:
+                print("\nunfortunately we couldn't find answere after 5000-th round.\n")
+                break
             
             # step 1
             if currentState not in explored:
@@ -290,8 +299,10 @@ class SearchAlgorithm():
             currentStateIndex = self.fringe.index(currentState)
             del self.fringe[currentStateIndex]
             self.FatherCost = self.cost[currentStateIndex]
+            
             del self.cost[currentStateIndex]
             print(self.FatherCost)
+            
             # now we must calculate the child of the currentstate and add them to the frontier 
             # In this code our default problem is 8 puzzle problem
             self.updateFringe(currentState, explored, GoalState, algorithmType="UCS")
@@ -327,6 +338,9 @@ class SearchAlgorithm():
             pass
         counter = 0 
         while True:
+            if counter == 1000 and self.autoFinish:
+                print("\nunfortunately we couldn't find answere after 5000-th round.\n")
+                break
             
             # step 1
             if currentState not in explored:
@@ -387,6 +401,9 @@ class SearchAlgorithm():
             pass
         counter = 0 
         while True:
+            if counter == 1000 and self.autoFinish:
+                print("\nunfortunately we couldn't find answere after 5000-th round.\n")
+                break
             
             # step 1
             if currentState not in explored:
@@ -436,9 +453,13 @@ class SearchAlgorithm():
         # Step 1
         currentState = deepcopy(initialState)
         explored = [] # We don't use this in hillClimbing. it is for not getting error
+        counter = 0
         
         # Step 2 - loop
         while currentState != GoalState:
+            if counter == 1000 and self.autoFinish:
+                print("\nunfortunately we couldn't find answere after 5000-th round.\n")
+                break
             
             # Step 3
             self.fringe = []
@@ -469,6 +490,8 @@ class SearchAlgorithm():
                 currentState = self.random8PuzzleCreator()
             else:
                 currentState = self.fringe[minValueIndex]
+            
+            counter += 1
             
         else:
             return currentState

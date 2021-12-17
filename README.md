@@ -91,4 +91,4 @@ In this algorithm, we have a initial state, we look for its neighbors and we cho
 e.	Else, we are in the local maximum, and in our problem, the solution for this local maximum is to starting again from a random state.
 
 # Refrences
-Slides and notations were adopted from my teacher, [Doctor Nooshin Maghsoodi](https://www.linkedin.com/in/nooshin-maghsoodi-7b76261b8?lipi=urn%3Ali%3Apage%3Ad_flagship3_profile_view_base_contact_details%3BfAiHZMkOS3qh%2BHYywIgOXA%3D%3D)
+Notations were adopted from my teacher slides, [Doctor Nooshin Maghsoodi](https://www.linkedin.com/in/nooshin-maghsoodi-7b76261b8?lipi=urn%3Ali%3Apage%3Ad_flagship3_profile_view_base_contact_details%3BfAiHZMkOS3qh%2BHYywIgOXA%3D%3D)

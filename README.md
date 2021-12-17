@@ -83,9 +83,9 @@ In this algorithm, we have a initial state, we look for its neighbors and we cho
 
 ###### Steps:
 1. Put initial state into the current state
-2. While current state is not equal the goal state do
+2. While current state is not equal the goal state does
 3. Find all the neighbor of the current state
 4. Choose the neighbor with the best value
 5. Compare this neighbor's value with the current state's value
-6. If the value is better choose this neighbor as the current neighbor
-7. And loop
+6. If the value is better, choose this neighbor as the current neighbor
+e.	Else, we are in the local maximum, and in our problem, the solution for this local maximum is to starting again from a random state.
